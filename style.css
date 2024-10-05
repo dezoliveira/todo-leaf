@@ -61,6 +61,10 @@ ul li i:hover {
   border-color: #4ade80;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 /*Insert this style in your css*/
 .fontAwesome {
   font-family: Poppins, 'FontAwesome', sans-serif;

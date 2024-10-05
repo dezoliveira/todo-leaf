@@ -1,7 +1,9 @@
 const formNotes = document.getElementById("formNotes")
 const taskInput = document.getElementById("taskInput")
-const todoList = []
+let todoList = []
 let i = 0
+
+console.log(todoList)
 
 formNotes.addEventListener("submit", (e) => {
   e.preventDefault()
@@ -22,6 +24,7 @@ const addTask = () => {
   }
 
   todoList.push(task)
+  console.log(todoList)
   taskInput.value = ''
   taskInput.focus()
 
@@ -29,12 +32,20 @@ const addTask = () => {
   
 }
 
-const deleteTask = (e) => {
-  alert('delete')
+const deleteTask = (task) => {
+
 }
 
-const completeTask = (e) => {
-  alert('complete')
+const completeTask = (task) => {
+  const todoElement = document.getElementById(task.id)
+
+  todoList.map((todo) => {
+    if (todo.id === task.id) {
+      todo.completed = true
+      todoElement.classList.add("completed")
+    }
+  })
+
 }
 
 const renderTaskList = () => {
@@ -75,6 +86,11 @@ const renderTaskList = () => {
       "fa-circle-check",
       "text-success"
     )
+
+    if (todo.completed) {
+      li.classList.add("completed")
+      completeButton.classList.add('text-success')
+    }
     
     completeButton.addEventListener("click", (e) => {
       e.preventDefault()
