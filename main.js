@@ -1,50 +1,44 @@
 const formNotes = document.getElementById("formNotes")
-const todoText = document.getElementById("todoText")
-const todoList = document.getElementById("todoList")
-const todos = []
+const taskInput = document.getElementById("taskInput")
+const todoList = []
+let i = 0
 
 formNotes.addEventListener("submit", (e) => {
   e.preventDefault()
-  addTodo()
+  addTask()
 })
 
-const addTodo = () => {
-  const todo = todoText.value
+const addTask = () => {
+  let taskText = taskInput.value.trim()
 
-  if (!todo) {
-    todoList.innerHTML += `
-      <h1>Lista Vazia</h1>
-    `
-
+  if (taskText == '')
     return
-  }
-  
-  todos.push(todo)
-  formNotes.reset()
-  todoText.focus()
 
-  renderTodoList()
+  const task = {
+    id: i++,
+    text: taskText,
+    createdAt: Date.now(),
+    completed: false
+  }
+
+  todoList.push(task)
+  taskInput.value = ''
+  taskInput.focus()
+
+  renderTaskList()
+  
 }
 
-const renderTodoList = () => {
-  todoList.innerHTML = ""
+const deleteTask = (e) => {
+  e.preventDefault()
+  alert('delete')
+}
 
-  for (let t in todos) {
-    todoList.innerHTML += `
-      <li
-        id="${t}"
-        class="list-group-item mb-2"
-      >
-        <div class="d-flex align-items-center justify-content-between">
-          <label>
-            ${todos[t]}
-          </label>
-          <div class="btn-group flex align-items-center justify-content-center gap-1">
-            <i class="fa-solid fa-circle-check text-success"></i>
-            <i class="fa-solid fa-circle-minus text-danger"></i>
-          </div>
-        </div>
-      </li>
-    `
-  }
+const completeTask = (e) => {
+  e.preventDefault()
+  alert('complete')
+}
+
+const renderTaskList = () => {
+  
 }
