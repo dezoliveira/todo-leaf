@@ -41,13 +41,18 @@ const deleteTask = (task) => {
   renderTaskList()
 }
 
-const completeTask = (task) => {
+const completeTask = (task, e) => {
+  const buttonId = e.target
   const todoElement = document.getElementById(task.id)
+
+  const child = todoElement.children[0].children[0]
 
   todoList.map((todo) => {
     if (todo.id === task.id) {
       todo.completed = true
-      todoElement.classList.add("completed")
+      todoElement.classList.add("done")
+      child.classList.add("completed")
+      buttonId.classList.add("text-success")
     }
   })
 
@@ -58,68 +63,82 @@ const renderTaskList = () => {
 
   todoListElement.innerHTML = ""
 
-  todoList.forEach(todo => {
+  if (todoList.length) {
+
+    todoList.forEach(todo => {
+      const li = document.createElement("li")
+      li.setAttribute("id", todo.id)
+      li.classList.add(
+        "list-group-item",
+        "mb-2"
+      )
+  
+      const div = document.createElement("div")
+      div.classList.add(
+        "d-flex",
+        "align-items-center",
+        "justify-content-between",
+      )
+  
+      const span = document.createElement("span")
+      span.textContent = todo.text
+  
+      const div2 = document.createElement("div")
+      div2.classList.add(
+        "btn-group",
+        "flex",
+        "align-items-center",
+        "justify-content-center",
+        "gap-1"
+      )
+  
+      const completeButton = document.createElement("i")
+      completeButton.setAttribute('id', 'completeButton')
+      completeButton.classList.add(
+        "fa-solid",
+        "fa-circle-check",
+        // "text-success"
+      )
+  
+      if (todo.completed) {
+        span.classList.add("completed")
+        li.classList.add('done')
+        completeButton.classList.add('text-success')
+      }
+      
+      completeButton.addEventListener("click", (e) => {
+        e.preventDefault()
+        completeTask(todo, e)
+      })
+  
+      const deleteButton = document.createElement("i")
+      deleteButton.classList.add(
+        "fa-solid",
+        "fa-circle-minus",
+        "text-danger"
+      )
+  
+      deleteButton.addEventListener("click", (e) => {
+        e.preventDefault()
+        deleteTask(todo)
+      })
+  
+      todoListElement.appendChild(li)
+      li.appendChild(div)
+      div.appendChild(span)
+      div.appendChild(div2)
+      div2.appendChild(completeButton)
+      div2.appendChild(deleteButton)
+      
+    })
+
+  } else {
+
     const li = document.createElement("li")
-    li.setAttribute("id", todo.id)
-    li.classList.add(
-      "list-group-item",
-      "mb-2"
-    )
+    const span = document.createElement("span")
+    span.textContent = "Nenhum tarefa a ser exibida no momento."
 
-    const div = document.createElement("div")
-    div.classList.add(
-      "d-flex",
-      "align-items-center",
-      "justify-content-between",
-    )
+    todoListElement.appendChild(span)
+  }
 
-    const label = document.createElement("label")
-    label.textContent = todo.text
-
-    const div2 = document.createElement("div")
-    div2.classList.add(
-      "btn-group",
-      "flex",
-      "align-items-center",
-      "justify-content-center",
-      "gap-1"
-    )
-
-    const completeButton = document.createElement("i")
-    completeButton.classList.add(
-      "fa-solid",
-      "fa-circle-check",
-      "text-success"
-    )
-
-    if (todo.completed) {
-      li.classList.add("completed")
-      completeButton.classList.add('text-success')
-    }
-    
-    completeButton.addEventListener("click", (e) => {
-      e.preventDefault()
-      completeTask(todo)
-    })
-
-    const deleteButton = document.createElement("i")
-    deleteButton.classList.add(
-      "fa-solid",
-      "fa-circle-minus",
-      "text-danger"
-    )
-
-    deleteButton.addEventListener("click", (e) => {
-      e.preventDefault()
-      deleteTask(todo)
-    })
-
-    todoListElement.appendChild(li)
-    li.appendChild(div)
-    div.appendChild(label)
-    div.appendChild(div2)
-    div2.appendChild(completeButton)
-    div2.appendChild(deleteButton)
-    
-  });
 }
