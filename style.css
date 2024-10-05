@@ -23,6 +23,30 @@ body {
 
 /* styles */
 #app {
-  background-color: #fafafa;
+  background-color: #4ade80;
   height: 100vh;
+}
+
+.card {
+  background-color: #fafafa;
+}
+
+/* custom bootstrap */
+.btn.btn-primary {
+  background-color: #4ade80;
+  border-color: #4ade80;
+}
+
+.btn.btn-primary:hover{
+  opacity: .9;
+}
+
+.btn.btn-primary:active:focus {
+  background-color: #4ade80;
+  border-color: #4ade80;
+}
+
+/*Insert this style in your css*/
+.fontAwesome {
+  font-family: Poppins, 'FontAwesome', sans-serif;
 }
