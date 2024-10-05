@@ -28,15 +28,6 @@ body {
   background-color: #4ade80;
 }
 
-/* styles */
-#app {
-  height: 100vh;
-}
-
-.card {
-  background-color: #fafafa;
-}
-
 ul li i {
   font-size: 24px;
 }
@@ -46,21 +37,25 @@ ul li i:hover {
   opacity: .9;
 }
 
-/* custom bootstrap */
-.btn.btn-primary {
-  background-color: #4ade80;
-  border-color: #4ade80;
+/* styles */
+#app {
+  height: 100vh;
 }
 
-.btn.btn-primary:hover{
-  opacity: .9;
+.navbar img {
+  width: 32px;
 }
 
-.btn.btn-primary:active:focus {
-  background-color: #4ade80;
-  border-color: #4ade80;
+.card {
+  background-color: #fafafa;
 }
 
+.card img {
+  width: 80px;
+}
+
+
+/* toggle dom classes */
 .completed {
   text-decoration: line-through;
 }
@@ -72,4 +67,30 @@ ul li i:hover {
 /*Insert this style in your css*/
 .fontAwesome {
   font-family: Poppins, 'FontAwesome', sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+
+  .card h1 {
+    font-size: 24px;
+  }
+  
+  .fontAwesome {
+    font-size: small;
+  }
+
+  li span,
+  li a {
+    font-size: small;
+  }
+
+  .card img {
+    width: 60px;
+  }
+
+  i#completeButton,
+  i#deleteButton {
+    font-size: 18px;
+  }
+  
 }

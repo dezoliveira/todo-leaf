@@ -118,6 +118,7 @@ const renderTaskList = () => {
       })
   
       const deleteButton = document.createElement("i")
+      deleteButton.setAttribute('id', 'deleteButton')
       deleteButton.classList.add(
         "fa-solid",
         "fa-circle-minus",
@@ -142,7 +143,7 @@ const renderTaskList = () => {
 
     const li = document.createElement("li")
     li.classList.add(
-      "list-group",
+      "list-group-item",
       "p-4",
       "text-center"
     )
@@ -159,7 +160,8 @@ const renderTaskList = () => {
 
     a.textContent = "Adicione uma tarefa"
 
-    todoListElement.appendChild(span)
+    todoListElement.appendChild(li)
+    li.appendChild(span)
     span.appendChild(a)
   }
 
