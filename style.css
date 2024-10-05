@@ -69,6 +69,13 @@ ul li i:hover {
   font-family: Poppins, 'FontAwesome', sans-serif;
 }
 
+.alert {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 15;
+}
+
 @media screen and (max-width: 768px) {
 
   .card h1 {

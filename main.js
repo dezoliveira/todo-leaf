@@ -3,6 +3,37 @@ const taskInput = document.getElementById("taskInput")
 let todoList = []
 let i = 0
 
+const toggleAlert = (value) => {
+  console.log(value)
+  const alert = document.querySelector(".alert")
+  let text = ""
+  
+  switch (value){
+    case "success":
+      text = "Task adicionada com sucesso."
+      alert.classList.remove('alert-danger')
+      alert.classList.add('alert-success')
+      break
+
+    case "danger":
+      text = "Task deletada com sucesso."
+      alert.classList.remove('alert-success')
+      alert.classList.add('alert-danger')
+      break
+
+    default: 
+      break
+  }
+
+  alert.textContent = text
+
+  alert.style.display = "block"
+  setTimeout(() => {
+    alert.style.display = "none"
+  }, 2000)
+
+}
+
 const beginTask = () => {
   document.getElementById('taskInput').focus()
 }
@@ -45,6 +76,7 @@ const deleteTask = (task) => {
 
   todoList = filteredTodo
   renderTaskList()
+  toggleAlert("danger")
 }
 
 const completeTask = (task, e) => {
@@ -138,6 +170,8 @@ const renderTaskList = () => {
       div2.appendChild(deleteButton)
       
     })
+
+    toggleAlert("success")
 
   } else {
 
