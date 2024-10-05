@@ -3,7 +3,13 @@ const taskInput = document.getElementById("taskInput")
 let todoList = []
 let i = 0
 
-console.log(todoList)
+const beginTask = () => {
+  document.getElementById('taskInput').focus()
+}
+
+document.addEventListener("load", () => {
+  renderTaskList()
+})
 
 formNotes.addEventListener("submit", (e) => {
   e.preventDefault()
@@ -135,10 +141,26 @@ const renderTaskList = () => {
   } else {
 
     const li = document.createElement("li")
+    li.classList.add(
+      "list-group",
+      "p-4",
+      "text-center"
+    )
+
     const span = document.createElement("span")
-    span.textContent = "Nenhum tarefa a ser exibida no momento."
+    span.textContent = "Lista vazia, "
+
+    const a = document.createElement("a")
+    a.href = "#"
+    
+    a.addEventListener("click", () => {
+      beginTask()
+    })
+
+    a.textContent = "Adicione uma tarefa"
 
     todoListElement.appendChild(span)
+    span.appendChild(a)
   }
 
 }
