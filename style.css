@@ -4,12 +4,18 @@
 /* css reset */
 * {
   box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
 }
 
 a {
   text-decoration: none;
   color: #7c3aed;
   font-weight: bold;
+}
+
+label:hover {
+  cursor: pointer;
 }
 
 body {
@@ -19,16 +25,25 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
+  background-color: #4ade80;
 }
 
 /* styles */
 #app {
-  background-color: #4ade80;
   height: 100vh;
 }
 
 .card {
   background-color: #fafafa;
+}
+
+ul li i {
+  font-size: 24px;
+}
+
+ul li i:hover {
+  cursor: pointer;
+  opacity: .9;
 }
 
 /* custom bootstrap */
