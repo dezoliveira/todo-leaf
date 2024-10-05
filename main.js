@@ -33,7 +33,12 @@ const addTask = () => {
 }
 
 const deleteTask = (task) => {
+  let filteredTodo = todoList.filter((todo) => {
+    return todo.id !== task.id
+  })
 
+  todoList = filteredTodo
+  renderTaskList()
 }
 
 const completeTask = (task) => {
