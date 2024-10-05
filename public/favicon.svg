@@ -1,0 +1,19 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="180" height="180">
+	<title>green_leaf_check_mark_box-ai</title>
+	<defs>
+		<linearGradient id="g1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1031.181,0,0,802.84,126.191,134)">
+			<stop offset="0" stop-color="#4fc646"/>
+			<stop offset="1" stop-color="#3fb06b"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { fill: #1d1e1d } 
+		.s1 { fill: url(#g1) } 
+	</style>
+	<g id="objects">
+		<g id="&lt;Group&gt;">
+			<path id="&lt;Compound Path&gt;" class="s0" d="m567.1 610.1v407.1h-475.5v-475.6h405.2c16.7-17 33.6-33.2 50.3-48.6h-504.1v572.7h572.7v-509.4c-17.5 18.3-33.6 36.3-48.6 53.8z"/>
+			<path id="&lt;Path&gt;" class="s1" d="m1157.4 219.9c-183 101.2-182.3 254.5-323.9 292.3-68.8 18.3-136.4 11.5-178.9-21.8-255.8 240.4-290.9 446.4-290.9 446.4-86.6-154.7-237.5-212.9-237.5-212.9 126.6-4.7 213.9 56.6 213.9 56.6 170.4-316.2 557.8-516.6 603.3-530.2-41 0.6-181.7 56.1-330.5 171.5-1.2-6.1-2.1-12.6-2.5-19.3-7.5-118.1 107.7-229 214.4-257.4 180-48 332.6 74.8 332.6 74.8z"/>
+		</g>
+	</g>
+</svg>
