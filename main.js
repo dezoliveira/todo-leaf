@@ -12,13 +12,22 @@ const toggleAlert = (value) => {
     case "success":
       text = "Task adicionada com sucesso."
       alert.classList.remove('alert-danger')
+      alert.classList.remove('alert-info')
       alert.classList.add('alert-success')
       break
 
     case "danger":
       text = "Task deletada com sucesso."
       alert.classList.remove('alert-success')
+      alert.classList.remove('alert-info')
       alert.classList.add('alert-danger')
+      break
+
+    case "info":
+      text = "Task completada com sucesso."
+      alert.classList.remove('alert-success')
+      alert.classList.remove('alert-danger')
+      alert.classList.add('alert-info')
       break
 
     default: 
@@ -93,6 +102,8 @@ const completeTask = (task, e) => {
       buttonId.classList.add("text-success")
     }
   })
+
+  toggleAlert("info")
 
 }
 
