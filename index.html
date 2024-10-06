@@ -42,6 +42,7 @@
         </div>
       </div>
 
+      <!-- Navbar -->
       <nav class="navbar bg-dark">
         <div class="container d-flex align-items-center">
           <a class="navbar-brand d-flex align-items-end" href="#">
@@ -50,14 +51,20 @@
           </a>
         </div>
       </nav>
-      <div class="container p-4">
+
+      <!-- Main -->
+      <main class="container p-4">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="col-lg-8 col-md-12 col-sm-12 gap-2 d-flex flex-column">
-            <div class="card p-4">
+
+            <!-- Form Card -->
+            <div id="formCard" class="card p-4">
               <div class="d-flex align-items-end justify-content-center pb-4 gap-2">
                 <h1 class="m-0">Todo Leaf</h1>
                 <img src="/images/logo-leaf.png"/>
               </div>
+
+              <!-- Form -->
               <form id="formNotes">
                 <div class="d-flex align-items-center gap-2">
                   <i class="fa-solid fa-keyboard d-sm-block d-none"></i>
@@ -69,7 +76,9 @@
                 </div>
               </form>
             </div>
-            <div class="card">
+
+            <!-- Todo List Card -->
+            <div id="todoListCard" class="card">
               <ul id="todoList" class="list-group p-4">
                 <li class="list-group-item p-4 text-center">
                   <span>Lista vazia,</span>
@@ -84,7 +93,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <!-- scripts -->
 

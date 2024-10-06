@@ -54,6 +54,9 @@ ul li i:hover {
   width: 80px;
 }
 
+form i {
+  font-size: 24px;
+}
 
 /* toggle dom classes */
 .completed {
@@ -64,7 +67,7 @@ ul li i:hover {
   background-color: #e5e5e5 !important;
 } 
 
-/*Insert this style in your css*/
+/* adiciona icone do font awesome no placeholder do input */
 .fontAwesome {
   font-family: Poppins, 'FontAwesome', sans-serif;
 }
