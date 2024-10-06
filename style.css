@@ -81,6 +81,19 @@ form i {
 
 @media screen and (max-width: 768px) {
 
+  #formCard button {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #formCard i {
+    font-size: 16px;
+  }
+
   .card h1 {
     font-size: 24px;
   }
