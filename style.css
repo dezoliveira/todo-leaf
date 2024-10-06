@@ -8,6 +8,7 @@
   list-style: none;
 }
 
+/* elements style */
 a {
   text-decoration: none;
   color: #7c3aed;
@@ -37,6 +38,10 @@ ul li i:hover {
   opacity: .9;
 }
 
+form i {
+  font-size: 24px;
+}
+
 /* styles */
 #app {
   height: 100vh;
@@ -52,10 +57,6 @@ ul li i:hover {
 
 .card img {
   width: 80px;
-}
-
-form i {
-  font-size: 24px;
 }
 
 /* toggle dom classes */
@@ -79,8 +80,10 @@ form i {
   z-index: 15;
 }
 
-@media screen and (max-width: 768px) {
+/* media queries */
 
+/* small desktops e mobile phones */
+@media screen and (max-width: 768px) {
   #formCard button {
     border-radius: 50%;
     height: 30px;
