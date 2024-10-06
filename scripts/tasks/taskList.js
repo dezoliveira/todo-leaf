@@ -97,9 +97,7 @@ export const renderTaskList = () => {
           // chama função de deletar task e fecha o modal
           deleteTask(todo)
           closeModal()
-        })
-
-        
+        })       
       })
   
       // renderiza todos os elementos criados acima como filhos da todoList
