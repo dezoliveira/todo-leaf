@@ -6,13 +6,15 @@ import { loadTaskExamples } from './scripts/tasks/tasks'
 
 // chama função que renderiza a todoList ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
+  const tutorialView = localStorage.getItem('tutorialView')
+  const formNotes = document.getElementById("formNotes")
+
   loadTaskExamples()
   renderTaskList()
-
-  const formNotes = document.getElementById("formNotes")
   
-  if (formNotes) {
+  if (!tutorialView && formNotes) {
     startIntroJS()
+    localStorage.setItem('tutorialView', true)
   }
 })
 
