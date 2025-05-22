@@ -1,5 +1,5 @@
 // imports
-import { beginTask, completeTask,  deleteTask } from "./tasks"
+import { beginTask, completeTask,  deleteTask, getTasksFromStorage } from "./tasks"
 import { toggleAlert } from "../elements/alert"
 import { todoList } from "./tasks"
 import { closeModal } from "../elements/modal"
@@ -11,23 +11,19 @@ const btnConfirm = document.getElementById("btnConfirm")
 // ** usei o createElement pois acredito se comportar melhor com renderização condicional **
 export const renderTaskList = () => {
   const todoListElement = document.getElementById("todoList")
-
-  todoListElement.innerHTML = ""
-
-  const storage = localStorage.getItem('tasks')
+  const tasksStorage = getTasksFromStorage()
   let tasks = []
 
-  if (storage) {
-    tasks = JSON.parse(storage)
-    console.log('storage', storage)
+  if (tasksStorage) {
+    tasks = tasksStorage
 
   } else {
     tasks = todoList
-    console.log('lista', todoList)
   }
 
   // se tiver algum item na lista
   if (tasks.length) {
+    todoListElement.innerHTML = ""
 
     // forEach para varrer a todoList
     tasks.forEach(task => {
