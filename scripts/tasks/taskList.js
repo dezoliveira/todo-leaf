@@ -14,15 +14,27 @@ export const renderTaskList = () => {
 
   todoListElement.innerHTML = ""
 
+  const storage = localStorage.getItem('tasks')
+  let tasks = []
+
+  if (storage) {
+    tasks = JSON.parse(storage)
+    console.log('storage', storage)
+
+  } else {
+    tasks = todoList
+    console.log('lista', todoList)
+  }
+
   // se tiver algum item na lista
-  if (todoList.length) {
+  if (tasks.length) {
 
     // forEach para varrer a todoList
-    todoList.forEach(todo => {
+    tasks.forEach(task => {
 
       // cria elemento li
       const li = document.createElement("li")
-      li.setAttribute("id", todo.id)
+      li.setAttribute("id", task.id)
       li.classList.add(
         "list-group-item",
         "mb-2"
@@ -38,7 +50,7 @@ export const renderTaskList = () => {
       
       // cria um span
       const span = document.createElement("span")
-      span.textContent = todo.text
+      span.textContent = task.text
       
       // cria outra div
       const div2 = document.createElement("div")
@@ -60,7 +72,7 @@ export const renderTaskList = () => {
       )
       
       // verifica se a todo está completa
-      if (todo.completed) {
+      if (task.completed) {
 
         // adiciona as classes de todo completa
         span.classList.add("completed")
@@ -73,7 +85,7 @@ export const renderTaskList = () => {
         e.preventDefault()
 
         // chama função de completar task
-        completeTask(todo, e)
+        completeTask(task, e)
       })
   
       // cria o deleteButton
@@ -95,7 +107,7 @@ export const renderTaskList = () => {
         btnConfirm.addEventListener('click', () => {
 
           // chama função de deletar task e fecha o modal
-          deleteTask(todo)
+          deleteTask(task)
           closeModal()
         })       
       })
