@@ -13,6 +13,7 @@ export const renderTaskList = () => {
   const todoListElement = document.getElementById("todoList")
   const tasksStorage = getTasksFromStorage()
   let tasks = []
+  todoListElement.innerHTML = ""
 
   if (tasksStorage) {
     tasks = tasksStorage
@@ -23,7 +24,6 @@ export const renderTaskList = () => {
 
   // se tiver algum item na lista
   if (tasks.length) {
-    todoListElement.innerHTML = ""
 
     // forEach para varrer a todoList
     tasks.forEach(task => {

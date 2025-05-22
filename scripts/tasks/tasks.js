@@ -81,6 +81,8 @@ export const deleteTask = (task) => {
   })
 
   todoList = filteredTodo
+  
+  localStorage.setItem('tasks', JSON.stringify(todoList))
 
   // renderiza a lista 
   renderTaskList()
