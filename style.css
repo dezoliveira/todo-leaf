@@ -110,8 +110,8 @@ form i {
     width: 60px;
   }
 
-  i#completeButton,
-  i#deleteButton {
+  .complete-button,
+  .delete-button {
     font-size: 18px;
   }
   

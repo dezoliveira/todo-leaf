@@ -14,6 +14,7 @@ export const renderTaskList = () => {
   const todoListElement = document.getElementById("todoList")
   const tasksStorage = getTasksFromStorage()
   let tasks = []
+  
   todoListElement.innerHTML = ""
 
   if (tasksStorage) {
@@ -61,10 +62,10 @@ export const renderTaskList = () => {
       
       // cria o completeButton
       const completeButton = document.createElement("i")
-      completeButton.setAttribute('id', 'completeButton')
       completeButton.classList.add(
         "fa-solid",
         "fa-circle-check",
+        "complete-button"
         // "text-success"
       )
       
@@ -87,13 +88,13 @@ export const renderTaskList = () => {
   
       // cria o deleteButton
       const deleteButton = document.createElement("i")
-      deleteButton.setAttribute('id', 'deleteButton')
       deleteButton.setAttribute("data-bs-toggle", "modal")
       deleteButton.setAttribute("data-bs-target", "#exampleModal")
       deleteButton.classList.add(
         "fa-solid",
         "fa-circle-minus",
-        "text-danger"
+        "text-danger",
+        "delete-button"
       )
   
       // adiciona evento de click no deleteButton

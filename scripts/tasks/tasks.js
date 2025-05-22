@@ -50,31 +50,32 @@ export const addTask = () => {
 // função que completa uma task
 export const completeTask = (task, e) => {
   const todoStorage = getTasksFromStorage()
-  
-  const buttonId = e.target
+  const buttonElement = e.target.closest(".complete-button") 
   const todoElement = document.getElementById(task.id)
 
   // busca o elemento span que é filho do filho do todoElement
-  const spanElement = todoElement.children[0].children[0]
+  const spanElement = todoElement.querySelector("span")
 
   // obtem a todo selecionada e a completa
   todoList.map((todo) => {
     if (todo.id === task.id) {
       todo.completed = true
-
-      todoElement.classList.add("done")
-      spanElement.classList.add("completed")
-      buttonId.classList.add("text-success")
     }
   })
 
   todoStorage.map((todo) => {
     if (todo.id === task.id) {
       todo.completed = true
-    
-      localStorage.setItem('tasks', JSON.stringify(todoStorage))
     }
   })
+
+  localStorage.setItem('tasks', JSON.stringify(todoStorage))
+
+  todoElement.classList.add("done")
+  spanElement.classList.add("completed")
+  buttonElement.classList.add("text-success")
+
+  renderTaskList()
 
   // chama o alert
   toggleAlert("info")
@@ -82,15 +83,14 @@ export const completeTask = (task, e) => {
 
 // função que deleta uma task
 export const deleteTask = (task) => {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
   // remove a task que foi selecionada
-  let filteredTodo = todoList.filter((todo) => {
-    return todo.id !== task.id
-  })
+  let filteredTodo = tasks.filter((todo) => todo.id !== task.id)
 
   todoList = filteredTodo
   
-  localStorage.setItem('tasks', JSON.stringify(todoList))
+  localStorage.setItem('tasks', JSON.stringify(filteredTodo))
 
   // renderiza a lista 
   renderTaskList()
@@ -126,4 +126,27 @@ export const getTasksFromStorage = () => {
   }
 
   return tasksStorage
+}
+
+export const loadTaskExamples = () => {
+  const storage = localStorage.getItem('tasks')
+
+  if (!storage) {
+    const taskExamples = [
+      {
+        id: 0,
+        text: 'Tomar uma xícara de café',
+        createdAt: Date.now(),
+        completed: false
+      },
+      {
+        id: 1,
+        text: 'Estudar Javascript',
+        createdAt: Date.now(),
+        completed: false
+      },
+    ]
+    
+    localStorage.setItem('tasks', JSON.stringify(taskExamples))
+  }
 }
