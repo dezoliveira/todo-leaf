@@ -16,15 +16,18 @@ export const beginTask = () => {
 
 // função que adiciona uma task
 export const addTask = () => {
+  const tasksStorage = getTasksFromStorage()
   let taskText = taskInput.value.trim()
+  let taskId = 0
 
-  // se input for vazio, não prossegue
-  if (taskText == '')
-    return
+  if (tasksStorage && tasksStorage.length > 0) {
+    const lastTask = tasksStorage[tasksStorage.length -1]
+    taskId = lastTask.id + 1
+  }
 
   // objeto task
   const task = {
-    id: i++,
+    id: taskId,
     text: taskText,
     createdAt: Date.now(),
     completed: false
@@ -32,6 +35,11 @@ export const addTask = () => {
 
   // adiciona task a todoList
   todoList.push(task)
+
+  // adiciona ao localStorage
+  addTaskToStorage(task)
+
+  // limpa os campos
   taskInput.value = ''
   taskInput.focus()
 
@@ -79,4 +87,33 @@ export const deleteTask = (task) => {
   
   // chama o alert
   toggleAlert("danger")
+}
+
+// função que adiciona task no storage
+export const addTaskToStorage = (task) => {
+  const storage = localStorage.getItem('tasks')
+  let tasksStorage = []
+
+  if (storage) {
+    tasksStorage = JSON.parse(storage)
+  }
+
+  const hasTask = tasksStorage.some(t => t.id === task.id)
+
+  if (!hasTask) {
+    tasksStorage.push(task)
+
+    localStorage.setItem('tasks', JSON.stringify(tasksStorage))
+  }
+}
+
+export const getTasksFromStorage = () => {
+  const storage = localStorage.getItem('tasks')
+  let tasksStorage = []
+
+  if (storage) {
+    tasksStorage = JSON.parse(storage)
+  }
+
+  return tasksStorage
 }

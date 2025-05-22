@@ -6,7 +6,7 @@ import { addTask } from '/scripts/tasks/tasks'
 const formNotes = document.getElementById("formNotes")
 
 // chama função que renderiza a todoList ao carregar a página
-document.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   renderTaskList()
 })
 
