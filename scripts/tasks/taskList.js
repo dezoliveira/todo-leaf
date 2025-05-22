@@ -6,6 +6,7 @@ import { closeModal } from "../elements/modal"
 
 // elements id
 const btnConfirm = document.getElementById("btnConfirm")
+let taskToDelete = null
 
 // funcão que renderiza a TodoList
 // ** usei o createElement pois acredito se comportar melhor com renderização condicional **
@@ -99,13 +100,7 @@ export const renderTaskList = () => {
       deleteButton.addEventListener("click", (e) => {
         e.preventDefault()
 
-        // adiciona evento de clique no botão de confirmação do modal
-        btnConfirm.addEventListener('click', () => {
-
-          // chama função de deletar task e fecha o modal
-          deleteTask(task)
-          closeModal()
-        })       
+        taskToDelete = task  
       })
   
       // renderiza todos os elementos criados acima como filhos da todoList
@@ -156,5 +151,13 @@ export const renderTaskList = () => {
     li.appendChild(span)
     span.appendChild(a)
   }
+
+  btnConfirm.addEventListener("click", () => {
+    if (taskToDelete) {
+      deleteTask(taskToDelete)
+      closeModal()
+      taskToDelete = null
+    }
+  })
   
 }

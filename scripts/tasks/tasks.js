@@ -49,7 +49,8 @@ export const addTask = () => {
 
 // função que completa uma task
 export const completeTask = (task, e) => {
-
+  const todoStorage = getTasksFromStorage()
+  
   const buttonId = e.target
   const todoElement = document.getElementById(task.id)
 
@@ -58,14 +59,21 @@ export const completeTask = (task, e) => {
 
   // obtem a todo selecionada e a completa
   todoList.map((todo) => {
-
     if (todo.id === task.id) {
       todo.completed = true
+
       todoElement.classList.add("done")
       spanElement.classList.add("completed")
       buttonId.classList.add("text-success")
     }
+  })
+
+  todoStorage.map((todo) => {
+    if (todo.id === task.id) {
+      todo.completed = true
     
+      localStorage.setItem('tasks', JSON.stringify(todoStorage))
+    }
   })
 
   // chama o alert
