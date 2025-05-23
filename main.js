@@ -33,6 +33,7 @@ if (formNotes) {
 // Remove a chave ao sair do app
 window.addEventListener("beforeunload", () => {
   const storage = localStorage.getItem('tasks')
+  
   if (storage === '[]') {
     localStorage.removeItem('tasks')
   }

@@ -1,5 +1,5 @@
 // imports
-import { beginTask, completeTask,  deleteTask, getTasksFromStorage } from "./tasks"
+import { beginTask, completeTask,  deleteTask } from "./tasks"
 import { toggleAlert } from "../elements/alert"
 import { closeModal } from "../elements/modal"
 import { getTasks } from "../utils/storage"

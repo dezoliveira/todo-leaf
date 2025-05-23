@@ -41,8 +41,10 @@ export const completeTask = (task, e) => {
 
   const updatedTasks = tasks.map((todo) => {
     if (todo.id === task.id) {
-      todo.completed = true
+      return { ...todo, completed: true }
     }
+
+    return todo
   })
 
   // Atualiza localStorage 
@@ -79,16 +81,16 @@ export const deleteTask = (task) => {
 export const loadTaskExamples = () => {
   const tasks = getTasks()
 
-  if (!tasks) {
+  if (!tasks.length) {
     const taskExamples = [
       {
-        id: 0,
+        id: crypto.randomUUID(),
         text: 'Tomar uma xícara de café',
         createdAt: Date.now(),
         completed: false
       },
       {
-        id: 1,
+        id: crypto.randomUUID(),
         text: 'Estudar Javascript',
         createdAt: Date.now(),
         completed: false
@@ -96,5 +98,7 @@ export const loadTaskExamples = () => {
     ]
     
     setTasks(taskExamples)
+    renderTaskList()
+    console.log(taskExamples)
   }
 }
