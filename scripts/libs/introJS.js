@@ -2,9 +2,11 @@
 import introJs from 'intro.js'
 import 'intro.js/minified/introjs.min.css'
 
+// Função que inicia o IntroJS
 export const startIntroJS = () => {
   const intro = introJs()
   
+  // configurações
   intro.setOptions({
     steps: [
       {

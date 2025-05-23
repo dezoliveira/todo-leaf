@@ -1,13 +1,20 @@
 // imports
-import { beginTask, completeTask,  deleteTask } from "./tasks"
 import { toggleAlert } from "../elements/alert"
 import { closeModal } from "../elements/modal"
 import { getTasks } from "../utils/storage"
+import { completeTask } from "./complete"
+import { deleteTask } from "./delete"
 
-// elements id
+// Globais
 const btnConfirm = document.getElementById("btnConfirm")
 let taskToDelete = null
 
+// Inicia o usuário ao fluxo das tasks
+const beginTask = () => {
+  taskInput.focus()
+}
+
+// Renderiza as tasks na lista
 export const renderTaskList = () => {
   const todoListElement = document.getElementById("todoList")
   const tasks = getTasks()
@@ -25,7 +32,7 @@ export const renderTaskList = () => {
         "mb-2"
       )
       
-      //cria uma div
+      // cria uma div
       const div = document.createElement("div")
       div.classList.add(
         "d-flex",
@@ -101,9 +108,6 @@ export const renderTaskList = () => {
       
     })
 
-    // chama o alerta
-    toggleAlert("success")
-
   // se a todoList esta vazia
   } else {
 
@@ -140,6 +144,7 @@ export const renderTaskList = () => {
     span.appendChild(a)
   }
 
+  // deleta task específica caso o usuário clique em deletar
   btnConfirm.addEventListener("click", () => {
     if (taskToDelete) {
       deleteTask(taskToDelete)
@@ -147,5 +152,4 @@ export const renderTaskList = () => {
       taskToDelete = null
     }
   })
-  
 }
