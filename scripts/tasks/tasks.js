@@ -37,27 +37,21 @@ export const addTask = () => {
 
 // função que completa uma task
 export const completeTask = (task, e) => {
-  const todoStorage = getTasksFromStorage()
+  const tasks = getTasks()
+
+  const updatedTasks = tasks.map((todo) => {
+    if (todo.id === task.id) {
+      todo.completed = true
+    }
+  })
+
+  // Atualiza localStorage 
+  setTasks(updatedTasks)
+
+  // Atualização dos elementos
   const buttonElement = e.target.closest(".complete-button") 
   const todoElement = document.getElementById(task.id)
-
-  // busca o elemento span que é filho do filho do todoElement
   const spanElement = todoElement.querySelector("span")
-
-  // obtem a todo selecionada e a completa
-  todoList.map((todo) => {
-    if (todo.id === task.id) {
-      todo.completed = true
-    }
-  })
-
-  todoStorage.map((todo) => {
-    if (todo.id === task.id) {
-      todo.completed = true
-    }
-  })
-
-  localStorage.setItem('tasks', JSON.stringify(todoStorage))
 
   todoElement.classList.add("done")
   spanElement.classList.add("completed")
