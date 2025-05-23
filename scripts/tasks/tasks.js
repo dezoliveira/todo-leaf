@@ -95,6 +95,6 @@ export const loadTaskExamples = () => {
       },
     ]
     
-    localStorage.setItem('tasks', JSON.stringify(taskExamples))
+    setTasks(taskExamples)
   }
 }
