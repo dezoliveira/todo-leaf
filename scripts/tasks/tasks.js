@@ -1,50 +1,38 @@
 // imports
 import { renderTaskList } from "./taskList"
 import { toggleAlert } from "../elements/alert"
+import { getTasks, setTasks } from "../utils/storage"
 
-// elements id
 const taskInput = document.getElementById("taskInput")
 
-// variáveis globais (export para exportar globalmente)
-export let todoList = []
-export let i = 0
-
-// inicia o usuário ao fluxo das tasks
+// Inicia o usuário ao fluxo das tasks
 export const beginTask = () => {
   taskInput.focus()
 }
 
-// função que adiciona uma task
+// Função que adiciona uma task
 export const addTask = () => {
-  const tasksStorage = getTasksFromStorage()
-  let taskText = taskInput.value.trim()
-  let taskId = 0
+  const taskText = taskInput.value.trim()
+  if (!taskText) return
 
-  if (tasksStorage && tasksStorage.length > 0) {
-    const lastTask = tasksStorage[tasksStorage.length -1]
-    taskId = lastTask.id + 1
-  }
+  const tasks = getTasks()
 
-  // objeto task
-  const task = {
-    id: taskId,
+  // Cria nova task
+  const newTask = {
+    id: crypto.randomUUID(),
     text: taskText,
     createdAt: Date.now(),
     completed: false
   }
 
-  // adiciona task a todoList
-  todoList.push(task)
+  const updatedTasks = [...tasks, newTask]
+  setTasks(updatedTasks)
 
-  // adiciona ao localStorage
-  addTaskToStorage(task)
-
-  // limpa os campos
   taskInput.value = ''
   taskInput.focus()
 
-  // renderiza a lista 
-  renderTaskList(todoList)
+  renderTaskList(updatedTasks)
+  toggleAlert("success")
 }
 
 // função que completa uma task
