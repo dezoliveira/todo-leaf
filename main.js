@@ -4,27 +4,33 @@ import { addTask } from '/scripts/tasks/tasks'
 import { startIntroJS } from './scripts/libs/introJS'
 import { loadTaskExamples } from './scripts/tasks/tasks'
 
-// chama função que renderiza a todoList ao carregar a página
+// Função principal
 document.addEventListener("DOMContentLoaded", () => {
   const tutorialView = localStorage.getItem('tutorialView')
   const formNotes = document.getElementById("formNotes")
 
+  // Carrega tasks de exemplo caso não existam
   loadTaskExamples()
+
+  // Renderiza lista de tasks
   renderTaskList()
   
+  // Inicia tutorial apenas se for a primeira vez
   if (!tutorialView && formNotes) {
     startIntroJS()
     localStorage.setItem('tutorialView', true)
   }
 })
 
-// chama função para adicionar a task após submeter o formulário
-formNotes.addEventListener("submit", (e) => {
-  e.preventDefault()
-  addTask()
-})
+// Adiciona task caso o form existir
+if (formNotes) {
+    formNotes.addEventListener("submit", (e) => {
+    e.preventDefault()
+    addTask()
+  })
+}
 
-// Limpa chave quando usuário sair do app
+// Remove a chave ao sair do app
 window.addEventListener("beforeunload", () => {
   const storage = localStorage.getItem('tasks')
   if (storage === '[]') {
