@@ -59,61 +59,27 @@ export const completeTask = (task, e) => {
 
   renderTaskList()
 
-  // chama o alert
   toggleAlert("info")
 }
 
-// função que deleta uma task
+// Função que deleta uma task
 export const deleteTask = (task) => {
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+  const tasks = getTasks()
 
-  // remove a task que foi selecionada
-  let filteredTodo = tasks.filter((todo) => todo.id !== task.id)
+  // Remove a task que foi selecionada
+  let updatedTasks = tasks.filter((todo) => todo.id !== task.id)
+  setTasks(updatedTasks)
 
-  todoList = filteredTodo
-  
-  localStorage.setItem('tasks', JSON.stringify(filteredTodo))
-
-  // renderiza a lista 
+  // Renderiza a lista 
   renderTaskList()
   
-  // chama o alert
   toggleAlert("danger")
 }
 
-// função que adiciona task no storage
-export const addTaskToStorage = (task) => {
-  const storage = localStorage.getItem('tasks')
-  let tasksStorage = []
-
-  if (storage) {
-    tasksStorage = JSON.parse(storage)
-  }
-
-  const hasTask = tasksStorage.some(t => t.id === task.id)
-
-  if (!hasTask) {
-    tasksStorage.push(task)
-
-    localStorage.setItem('tasks', JSON.stringify(tasksStorage))
-  }
-}
-
-export const getTasksFromStorage = () => {
-  const storage = localStorage.getItem('tasks')
-  let tasksStorage = []
-
-  if (storage) {
-    tasksStorage = JSON.parse(storage)
-  }
-
-  return tasksStorage
-}
-
 export const loadTaskExamples = () => {
-  const storage = localStorage.getItem('tasks')
+  const tasks = getTasks()
 
-  if (!storage) {
+  if (!tasks) {
     const taskExamples = [
       {
         id: 0,
