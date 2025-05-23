@@ -1,33 +1,20 @@
 // imports
 import { beginTask, completeTask,  deleteTask, getTasksFromStorage } from "./tasks"
 import { toggleAlert } from "../elements/alert"
-import { todoList } from "./tasks"
 import { closeModal } from "../elements/modal"
+import { getTasks } from "../utils/storage"
 
 // elements id
 const btnConfirm = document.getElementById("btnConfirm")
 let taskToDelete = null
 
-// funcão que renderiza a TodoList
-// ** usei o createElement pois acredito se comportar melhor com renderização condicional **
 export const renderTaskList = () => {
   const todoListElement = document.getElementById("todoList")
-  const tasksStorage = getTasksFromStorage()
-  let tasks = []
+  const tasks = getTasks()
   
   todoListElement.innerHTML = ""
 
-  if (tasksStorage) {
-    tasks = tasksStorage
-
-  } else {
-    tasks = todoList
-  }
-
-  // se tiver algum item na lista
   if (tasks.length) {
-
-    // forEach para varrer a todoList
     tasks.forEach(task => {
 
       // cria elemento li
