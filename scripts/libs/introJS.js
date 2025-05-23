@@ -3,7 +3,9 @@ import introJs from 'intro.js'
 import 'intro.js/minified/introjs.min.css'
 
 export const startIntroJS = () => {
-  introJs().setOptions({
+  const intro = introJs()
+  
+  intro.setOptions({
     steps: [
       {
         intro: "Bem vindo ao meu gerenciador de tarefas!"
@@ -45,6 +47,8 @@ export const startIntroJS = () => {
           </a>
         `
       }
-    ]
-  }).start()
+    ],
+  })
+
+  intro.start()
 }
