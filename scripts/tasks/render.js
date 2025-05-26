@@ -14,14 +14,18 @@ const beginTask = () => {
 }
 
 // Renderiza as tasks na lista
-export const renderTaskList = () => {
+export const renderTaskList = (currentPage = 1) => {
   const todoListElement = document.getElementById("todoList")
   const tasks = getTasks()
+  const itensPerPage = 10
+  const start = (currentPage -1) * itensPerPage
+  const end = start + itensPerPage
+  const paginatedTasks = tasks.slice(start, end)
   
   todoListElement.innerHTML = ""
 
   if (tasks.length) {
-    tasks.forEach(task => {
+    paginatedTasks.forEach(task => {
 
       // cria elemento li
       const li = document.createElement("li")
@@ -133,6 +137,7 @@ export const renderTaskList = () => {
 
           const page = parseInt(e.currentTarget.getAttribute('data-page'))
           console.log(page)
+          renderTaskList(page)
         })
       })
 

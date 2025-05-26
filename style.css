@@ -114,5 +114,16 @@ form i {
   .delete-button {
     font-size: 18px;
   }
-  
+}
+
+a.page-link {
+  color: #fff;
+  background-color: #212529;
+}
+
+a.page-link:hover {
+  cursor: pointer;
+    color: #fff;
+  background-color: #212529;
+  opacity: .8;
 }
