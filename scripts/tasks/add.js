@@ -1,7 +1,9 @@
+// Imports
 import { getTasks, setTasks } from "../utils/storage"
 import { renderTaskList } from "./render"
 import { toggleAlert } from "../elements/alert"
 
+// Elements
 const taskInput = document.getElementById("taskInput")
 
 // Função que adiciona uma task

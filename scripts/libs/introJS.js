@@ -1,4 +1,4 @@
-// intro js
+// Intro js
 import introJs from 'intro.js'
 import 'intro.js/minified/introjs.min.css'
 

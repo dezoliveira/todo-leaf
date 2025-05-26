@@ -1,8 +1,10 @@
+// Imports
 import { loadTaskExamples } from "../tasks/examples"
 import { startIntroJS } from "../libs/introJS"
 import { addTask } from "../tasks/add"
 import { renderTaskList } from "../tasks/render"
 
+// Função que inicializa o app
 export const initializeApp = () => {
   // Função principal
   document.addEventListener("DOMContentLoaded", () => {

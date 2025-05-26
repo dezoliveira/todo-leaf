@@ -1,8 +1,9 @@
+// Imports
 import { getTasks, setTasks } from "../utils/storage"
 import { toggleAlert } from "../elements/alert"
 import { renderTaskList } from "./render"
 
-// função que completa uma task
+// Função que completa uma task
 export const completeTask = (task, e) => {
   const tasks = getTasks()
 

@@ -1,18 +1,11 @@
-// função que gerencia a exibição do alerta na página
+// Função que gerencia a exibição do alerta na página
 export const toggleAlert = (value) => {
 
-	// elements id
+	// Elements
 	const alert = document.querySelector(".alert")
 	let text = ""
-	
-	// switch case
 
-	// parametros:
-	// - success
-	// - danger
-	// - info
-
-	// gerencia as classes do alerta conforme o parâmetro
+	// Gerencia as classes do alerta conforme o parâmetro
 	switch (value){
 
 		// success
@@ -45,7 +38,7 @@ export const toggleAlert = (value) => {
 
 	alert.textContent = text
 
-	// temporizador 
+	// Temporizador 
 	alert.style.display = "block"
 
 	setTimeout(() => {
