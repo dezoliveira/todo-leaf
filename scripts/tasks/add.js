@@ -28,6 +28,7 @@ export const addTask = () => {
   taskInput.value = ''
   taskInput.focus()
 
-  renderTaskList(updatedTasks)
+  // renderTaskList(updatedTasks)
+  renderTaskList()
   toggleAlert("success")
 }
