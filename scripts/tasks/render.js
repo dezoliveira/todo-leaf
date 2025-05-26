@@ -1,5 +1,4 @@
-// imports
-import { toggleAlert } from "../elements/alert"
+// Imports
 import { closeModal } from "../elements/modal"
 import { getTasks } from "../utils/storage"
 import { completeTask } from "./complete"
@@ -107,6 +106,40 @@ export const renderTaskList = () => {
       div2.appendChild(deleteButton)
       
     })
+
+    if (tasks.length > 10) {
+      // pagination
+      const pagination = document.querySelector('#pagination')
+      const pages = Math.ceil(tasks.length / 10)
+      let html = '<ul class="d-flex pagination">'
+
+      if (pages <= 1) {
+        pagination.style.display = 'none'
+        return
+      }
+
+      pagination.style.display = 'block'
+
+      for (let i = 1; i <= pages; i++) {
+        html += `<a class="page-link" data-page="${i}"><li class="page-item">${i}</li></a>`
+      }
+
+      html += '</ul>'
+      pagination.innerHTML = html
+
+      document.querySelectorAll('.page-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault()
+
+          const page = parseInt(e.currentTarget.getAttribute('data-page'))
+          console.log(page)
+        })
+      })
+
+    } else {
+      document.querySelector('#pagination').style.display = 'none'
+    }
+    
 
   // se a todoList esta vazia
   } else {
