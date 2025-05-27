@@ -127,3 +127,8 @@ a.page-link:hover {
   background-color: #212529;
   opacity: .8;
 }
+
+#todoList {
+  min-height: 60vh;
+  max-height: 60vh;
+}
