@@ -49,12 +49,14 @@ export const handleUnload = () => {
 export const getUserLocation = async () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async(position) => {
+      const element = document.getElementById("weatherDescription")
+      
       const lat = position.coords.latitude
       const lon = position.coords.longitude
 
       const weather = await loadWeather(lat, lon)
 
-      console.log(`Previsão de hoje: ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`)
+      element.innerHTML = `${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
     },
     (error) => {
       console.error("Erro ao obter localização", error.message)
