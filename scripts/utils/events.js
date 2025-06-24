@@ -3,6 +3,8 @@ import { loadTaskExamples } from "../tasks/examples"
 import { startIntroJS } from "../libs/introJS"
 import { addTask } from "../tasks/add"
 import { renderTaskList } from "../tasks/render"
+import { getWeatherForecast } from "../api/wheaterApi"
+import { getWeatherDescription, loadWeather } from "../libs/weather"
 
 // Função que inicializa o app
 export const initializeApp = () => {
@@ -42,4 +44,23 @@ export const handleUnload = () => {
       localStorage.removeItem('tasks')
     }
   })
+}
+
+export const getUserLocation = async () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(async(position) => {
+      const lat = position.coords.latitude
+      const lon = position.coords.longitude
+
+      const weather = await loadWeather(lat, lon)
+
+      console.log(`Previsão de hoje: ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`)
+    },
+    (error) => {
+      console.error("Erro ao obter localização", error.message)
+    })
+  
+  } else {
+    console.error("Geolocalização não é suportada pelo navegador")
+  }
 }

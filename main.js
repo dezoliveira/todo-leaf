@@ -1,5 +1,7 @@
 // Imports
-import { initializeApp, handleUnload } from "./scripts/utils/events";
+import { initializeApp, handleUnload, getUserLocation } from "./scripts/utils/events";
 
 initializeApp()
 handleUnload()
+getUserLocation()
+
