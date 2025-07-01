@@ -53,6 +53,7 @@ export const handleUnload = () => {
 let userLat = null
 let userLon = null
 
+// Pega a geolocalização do usuário
 export const getUserLocation = async () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async(position) => {
@@ -61,13 +62,14 @@ export const getUserLocation = async () => {
       userLat = position.coords.latitude
       userLon = position.coords.longitude
 
+      // Consulta a previsão do tempo com base na latitude/longitude
       const { daily } = await getWeatherForecast(userLat, userLon)
-
       const weather = await loadWeather(userLat, userLon)
 
-      element.innerHTML = `<i class="${weather.icon}" style="font-size: 2rem"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
+      element.innerHTML = `<i class="${weather.icon}" style="font-size: 2rem"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C
+      `
     
-      // Ultima data
+      // Pega ultima data presente na previsão
       const lastDay = new Date(daily.time[daily.time.length -1])
 
       createFlatPicker(lastDay)
@@ -81,6 +83,7 @@ export const getUserLocation = async () => {
   }
 }
 
+// Cria o flatpicker
 const createFlatPicker = (maxDate) => {
   flatpickr("#datepicker", {
     dateFormat: "d/m/Y",
@@ -89,9 +92,11 @@ const createFlatPicker = (maxDate) => {
     defaultDate: "today",
     onChange: async (selectedDates) => {
       try {
+        // Formata data para padrão do open weather
         let formattedDate = new Date(selectedDates).toLocaleDateString()
         formattedDate = formattedDate.split("/")[2] + '-' + formattedDate.split("/")[1] + '-' + formattedDate.split("/")[0]
 
+        // Pega o index da data caso exista no array
         const { daily } = await getWeatherForecast(userLat, userLon)
         const index = daily.time.indexOf(formattedDate)
 
@@ -99,8 +104,8 @@ const createFlatPicker = (maxDate) => {
           return
         }
 
+        // Renderiza previsão
         const weather = await loadWeather(userLat, userLon, index)
-        console.log(weather)
 
         const element = document.getElementById("weatherDescription")
         element.innerHTML = `<i class="${weather.icon}"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
