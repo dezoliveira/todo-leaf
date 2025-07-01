@@ -81,11 +81,11 @@ export const getUserLocation = async () => {
   }
 }
 
-const createFlatPicker = (date) => {
+const createFlatPicker = (maxDate) => {
   flatpickr("#datepicker", {
     dateFormat: "d/m/Y",
     minDate: "today",
-    maxDate: date,
+    maxDate: maxDate,
     defaultDate: "today",
     onChange: async (selectedDates) => {
       try {
@@ -94,6 +94,10 @@ const createFlatPicker = (date) => {
 
         const { daily } = await getWeatherForecast(userLat, userLon)
         const index = daily.time.indexOf(formattedDate)
+
+        if (index === -1) {
+          return
+        }
 
         const weather = await loadWeather(userLat, userLon, index)
         console.log(weather)
