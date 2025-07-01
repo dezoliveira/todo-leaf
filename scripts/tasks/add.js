@@ -5,6 +5,8 @@ import { toggleAlert } from "../elements/alert"
 
 // Elements
 const taskInput = document.getElementById("taskInput")
+const taskSchedule = document.getElementById("taskSchedule")
+const datepicker = document.getElementById("datepicker")
 
 // Função que adiciona uma task
 export const addTask = () => {
@@ -18,8 +20,11 @@ export const addTask = () => {
     id: crypto.randomUUID(),
     text: taskText,
     createdAt: Date.now(),
-    completed: false
+    completed: false,
+    schedule: taskSchedule.checked ? datepicker.value : null
   }
+
+  console.log(newTask)
 
   // Adiciona nova task junto com as outras
   const updatedTasks = [...tasks, newTask]

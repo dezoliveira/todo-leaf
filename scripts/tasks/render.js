@@ -1,5 +1,7 @@
 // Imports
+import { getWeatherForecast } from "../api/wheaterApi"
 import { closeModal } from "../elements/modal"
+import { loadWeather } from "../libs/weather"
 import { createPagination } from "../utils/pagination"
 import { getTasks } from "../utils/storage"
 import { completeTask } from "./complete"
@@ -37,7 +39,7 @@ export const renderTaskList = (currentPage = 1) => {
   }
 
   if (paginatedTasks.length) {
-    paginatedTasks.forEach(task => {
+    paginatedTasks.forEach(async task => {
 
       // cria elemento li
       const li = document.createElement("li")
@@ -58,6 +60,30 @@ export const renderTaskList = (currentPage = 1) => {
       // cria um span
       const span = document.createElement("span")
       span.textContent = task.text
+
+      const span2 = document.createElement("span")
+
+      // busca a previsão do tempo para o dia
+      if (task.schedule) {
+        const lat = sessionStorage.getItem("lat")
+        const lon = sessionStorage.getItem("lon")
+
+        if (lat && lon) {
+          const { daily } = await getWeatherForecast(lat, lon)
+          const formattedDate = task.schedule.split("/").reverse().join("-")
+          const index = daily.time.indexOf(formattedDate)
+
+          if (index !== -1) {
+            const weather = await loadWeather(lat, lon, index)
+            console.log(weather)
+
+            const wheaterSpan = document.createElement("span")
+              wheaterSpan.innerHTML = `<i class="${weather.icon}" style="font-size: 1rem"></i>`
+
+            span2.appendChild(wheaterSpan)
+          }
+        }
+      }
       
       // cria outra div
       const div2 = document.createElement("div")
@@ -116,6 +142,7 @@ export const renderTaskList = (currentPage = 1) => {
       // renderiza todos os elementos criados acima como filhos da todoList
       todoListElement.appendChild(li)
       li.appendChild(div)
+      div.appendChild(span2)
       div.appendChild(span)
       div.appendChild(div2)
       div2.appendChild(completeButton)
