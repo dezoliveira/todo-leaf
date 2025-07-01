@@ -65,7 +65,7 @@ export const getUserLocation = async () => {
 
       const weather = await loadWeather(userLat, userLon)
 
-      element.innerHTML = `${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
+      element.innerHTML = `<i class="${weather.icon}" style="font-size: 2rem"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
     
       // Ultima data
       const lastDay = new Date(daily.time[daily.time.length -1])
@@ -103,7 +103,7 @@ const createFlatPicker = (maxDate) => {
         console.log(weather)
 
         const element = document.getElementById("weatherDescription")
-        element.innerHTML = `${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
+        element.innerHTML = `<i class="${weather.icon}"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
 
       } catch(error) {
         console.error("Data inválida", error)
