@@ -62,6 +62,10 @@ export const getUserLocation = async () => {
       userLat = position.coords.latitude
       userLon = position.coords.longitude
 
+      // Guarda lat e lon na sessão
+      sessionStorage.setItem("lat", userLat)
+      sessionStorage.setItem("lon", userLon)
+
       // Consulta a previsão do tempo com base na latitude/longitude
       const { daily } = await getWeatherForecast(userLat, userLon)
       const weather = await loadWeather(userLat, userLon)
