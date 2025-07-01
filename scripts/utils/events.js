@@ -70,7 +70,6 @@ export const getUserLocation = async () => {
       // Ultima data
       const lastDay = new Date(daily.time[daily.time.length -1])
 
-      console.log(lastDay)
       createFlatPicker(lastDay)
     },
     (error) => {
@@ -91,22 +90,16 @@ const createFlatPicker = (date) => {
     onChange: async (selectedDates) => {
       try {
         let formattedDate = new Date(selectedDates).toLocaleDateString()
-        let index = 0
-
-        const { daily } = await getWeatherForecast(userLat, userLon)
-
-        const dates = daily.time
-
-        console.log(dates)
-
         formattedDate = formattedDate.split("/")[2] + '-' + formattedDate.split("/")[1] + '-' + formattedDate.split("/")[0]
 
-        for (let i in dates) {
-          if (formattedDate.match(dates[i])) {
-            index = dates.indexOf(formattedDate)
-            console.log(index)
-          }
-        }
+        const { daily } = await getWeatherForecast(userLat, userLon)
+        const index = daily.time.indexOf(formattedDate)
+
+        const weather = await loadWeather(userLat, userLon, index)
+        console.log(weather)
+
+        const element = document.getElementById("weatherDescription")
+        element.innerHTML = `${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
 
       } catch(error) {
         console.error("Data inválida", error)

@@ -18,13 +18,13 @@ export function getWeatherDescription(code) {
   return weatherDescriptions[code] || "🌈 Clima desconhecido"
 }
 
-export async function loadWeather(lat, lon) {
+export async function loadWeather(lat, lon, index=0) {
   const { daily } = await getWeatherForecast(lat, lon)
 
-  const code = daily.weathercode[0]
+  const code = daily.weathercode[index]
   const description = getWeatherDescription(code) 
-  const max = daily.temperature_2m_max[0]
-  const min = daily.temperature_2m_min[0]
+  const max = daily.temperature_2m_max[index]
+  const min = daily.temperature_2m_min[index]
 
   return {
     description,
