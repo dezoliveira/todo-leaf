@@ -3,15 +3,19 @@ import { loadTaskExamples } from "../tasks/examples"
 import { startIntroJS } from "../libs/introJS"
 import { addTask } from "../tasks/add"
 import { renderTaskList } from "../tasks/render"
+import { loadWeather } from "../libs/weather"
+import flatpickr from "flatpickr"
+import "flatpickr/dist/themes/light.css"
 import { getWeatherForecast } from "../api/wheaterApi"
-import { getWeatherDescription, loadWeather } from "../libs/weather"
 
 // Função que inicializa o app
-export const initializeApp = () => {
+export const initializeApp = async () => {
   // Função principal
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     const tutorialView = localStorage.getItem('tutorialView')
     const formNotes = document.getElementById("formNotes")
+
+    await getUserLocation()
 
     // Carrega tasks de exemplo caso não existam
     loadTaskExamples()
@@ -46,17 +50,28 @@ export const handleUnload = () => {
   })
 }
 
+let userLat = null
+let userLon = null
+
 export const getUserLocation = async () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async(position) => {
       const element = document.getElementById("weatherDescription")
       
-      const lat = position.coords.latitude
-      const lon = position.coords.longitude
+      userLat = position.coords.latitude
+      userLon = position.coords.longitude
 
-      const weather = await loadWeather(lat, lon)
+      const { daily } = await getWeatherForecast(userLat, userLon)
+
+      const weather = await loadWeather(userLat, userLon)
 
       element.innerHTML = `${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C`
+    
+      // Ultima data
+      const lastDay = new Date(daily.time[daily.time.length -1])
+
+      console.log(lastDay)
+      createFlatPicker(lastDay)
     },
     (error) => {
       console.error("Erro ao obter localização", error.message)
@@ -65,4 +80,37 @@ export const getUserLocation = async () => {
   } else {
     console.error("Geolocalização não é suportada pelo navegador")
   }
+}
+
+const createFlatPicker = (date) => {
+  flatpickr("#datepicker", {
+    dateFormat: "d/m/Y",
+    minDate: "today",
+    maxDate: date,
+    defaultDate: "today",
+    onChange: async (selectedDates) => {
+      try {
+        let formattedDate = new Date(selectedDates).toLocaleDateString()
+        let index = 0
+
+        const { daily } = await getWeatherForecast(userLat, userLon)
+
+        const dates = daily.time
+
+        console.log(dates)
+
+        formattedDate = formattedDate.split("/")[2] + '-' + formattedDate.split("/")[1] + '-' + formattedDate.split("/")[0]
+
+        for (let i in dates) {
+          if (formattedDate.match(dates[i])) {
+            index = dates.indexOf(formattedDate)
+            console.log(index)
+          }
+        }
+
+      } catch(error) {
+        console.error("Data inválida", error)
+      }
+    }
+  })
 }
