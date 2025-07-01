@@ -116,3 +116,17 @@ const createFlatPicker = (maxDate) => {
     }
   })
 }
+
+export const toggleSchedule = () => {
+  const taskSchedule = document.getElementById("taskSchedule")
+  const datepicker = document.getElementById("datepicker")
+
+  taskSchedule.addEventListener('click', () => {
+    if (taskSchedule.checked) {
+      datepicker.removeAttribute("disabled")
+    
+    } else {
+      datepicker.setAttribute("disabled", true)
+    }
+  })
+}

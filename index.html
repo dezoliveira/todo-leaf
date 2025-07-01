@@ -73,22 +73,22 @@
                   </button>
                 </div>
 
-                <div class="d-flex justify-content-around gap-2">
-                  <div class="d-flex flex-column gap-2">
+                <div class="d-flex gap-2 col-md-12">
+                  <div class="d-flex flex-column gap-2 col-md-3">
                     <div>
                       <label class="d-flex align-items-center gap-1">
-                        <input type="checkbox" />
+                        <input id="taskSchedule" type="checkbox" />
                         Agendar Tarefa
                       </label>
                     </div>
                     <div class="d-flex gap-2 ">
                       <div class="d-flex flex-start">
-                        <input id="datepicker" class="form-control" placeholder="Escolha uma data" />
+                        <input id="datepicker" class="form-control" placeholder="Escolha uma data" disabled="true" />
                       </div>                     
                     </div>
                   </div>
 
-                  <div class="d-flex flex-column justify-content-between">
+                  <div class="d-flex flex-column justify-content-between col-md-9">
                     <span class="d-flex align-items-center gap-1">Previsão do dia:</span>
                     <div id="weatherDescription"></div>
                   </div>
