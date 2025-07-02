@@ -64,25 +64,10 @@ export const renderTaskList = (currentPage = 1) => {
       const span2 = document.createElement("span")
 
       // busca a previsão do tempo para o dia
-      if (task.schedule) {
-        const lat = sessionStorage.getItem("lat")
-        const lon = sessionStorage.getItem("lon")
-
-        if (lat && lon) {
-          const { daily } = await getWeatherForecast(lat, lon)
-          const formattedDate = task.schedule.split("/").reverse().join("-")
-          const index = daily.time.indexOf(formattedDate)
-
-          if (index !== -1) {
-            const weather = await loadWeather(lat, lon, index)
-            console.log(weather)
-
-            const wheaterSpan = document.createElement("span")
-              wheaterSpan.innerHTML = `<i class="${weather.icon}" style="font-size: 1rem"></i>`
-
-            span2.appendChild(wheaterSpan)
-          }
-        }
+      if (task.weatherIcon) {
+        const wheaterSpan = document.createElement("span")
+        wheaterSpan.innerHTML = `<i class="${task.weatherIcon}" style="font-size: 1rem"></i>`
+        span2.appendChild(wheaterSpan)
       }
       
       // cria outra div

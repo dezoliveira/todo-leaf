@@ -70,7 +70,7 @@ export const getUserLocation = async () => {
       const { daily } = await getWeatherForecast(userLat, userLon)
       const weather = await loadWeather(userLat, userLon)
 
-      element.innerHTML = `<i class="${weather.icon}" style="font-size: 2rem"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C
+      element.innerHTML = `<i class="${weather.icon}"></i> ${weather.description}, mín: ${weather.min}°C, máx: ${weather.max}°C
       `
     
       // Pega ultima data presente na previsão
