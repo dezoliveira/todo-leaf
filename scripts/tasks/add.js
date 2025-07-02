@@ -28,6 +28,7 @@ export const addTask = async () => {
     }
 
     const index = daily.time.indexOf(formattedDate)
+    console.log(index)
     if (index !== -1) {
       const weather = await loadWeather(lat, lon, index)
       icon = weather.icon

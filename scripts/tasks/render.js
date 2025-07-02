@@ -59,15 +59,25 @@ export const renderTaskList = (currentPage = 1) => {
       
       // cria um span
       const span = document.createElement("span")
-      span.textContent = task.text
 
-      const span2 = document.createElement("span")
-
-      // busca a previsão do tempo para o dia
+      // insere o icone da previsão
       if (task.weatherIcon) {
-        const wheaterSpan = document.createElement("span")
-        wheaterSpan.innerHTML = `<i class="${task.weatherIcon}" style="font-size: 1rem"></i>`
-        span2.appendChild(wheaterSpan)
+        const icon = document.createElement("i")
+        icon.className = task.weatherIcon
+        icon.style.fontSize = "1rem"
+        icon.style.marginRight = "0.5rem"
+        span.appendChild(icon)
+      }
+
+      // adiciona o texto
+      span.append(task.text) 
+
+      // se tiver agendamento, adiciona a badge
+      if (task.schedule) {
+        const badge = document.createElement("span")
+        badge.classList.add("badge", "bg-info", "ms-2")
+        badge.textContent = task.schedule
+        span.appendChild(badge)
       }
       
       // cria outra div
@@ -127,7 +137,7 @@ export const renderTaskList = (currentPage = 1) => {
       // renderiza todos os elementos criados acima como filhos da todoList
       todoListElement.appendChild(li)
       li.appendChild(div)
-      div.appendChild(span2)
+      // div.appendChild(span2)
       div.appendChild(span)
       div.appendChild(div2)
       div2.appendChild(completeButton)
