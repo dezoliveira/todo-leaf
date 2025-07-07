@@ -1,7 +1,7 @@
 import { renderTaskList } from "../tasks/render"
 
 // Cria a paginação
-export const createPagination = (tasks) => {
+export const createPagination = (tasks, schedule = false) => {
   // elemento paginação
   const pagination = document.querySelector('#pagination')
   
@@ -31,7 +31,7 @@ export const createPagination = (tasks) => {
       e.preventDefault()
 
       const page = parseInt(e.currentTarget.getAttribute('data-page'))
-      renderTaskList(page)
+      renderTaskList(page, schedule)
     })
   })
 }

@@ -17,13 +17,20 @@ const beginTask = () => {
 }
 
 // Renderiza as tasks na lista
-export const renderTaskList = (currentPage = 1) => {
+export const renderTaskList = (currentPage = 1, schedule = false) => {
   const todoListElement = document.getElementById("todoList")
   const tasks = getTasks()
   
   // ordenação das tasks por hora criada
-  const sortedTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  let sortedTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
+  if (schedule) {
+    sortedTasks = tasks.filter(task => task.schedule !== null)
   
+  } else {
+    sortedTasks = tasks.filter(task => task.schedule === null)
+  }
+
   // configurações da paginação
   const itensPerPage = 10
   const start = (currentPage -1) * itensPerPage
@@ -33,7 +40,8 @@ export const renderTaskList = (currentPage = 1) => {
   todoListElement.innerHTML = ""
 
   if (tasks.length > 10) {
-    createPagination(tasks)
+    createPagination(sortedTasks)
+    
   } else {
     document.querySelector('#pagination').style.display = 'none'
   }

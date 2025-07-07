@@ -57,6 +57,15 @@ export const addTask = async () => {
   taskInput.focus()
 
   // renderTaskList(updatedTasks)
-  renderTaskList()
+  renderTaskList(1, taskSchedule.checked)
+
+  if (taskSchedule.checked) {
+    document.getElementById('nav-schedule-tab').click()
+
+  } else {
+    document.getElementById('nav-tasks-tab').click()
+  }
+
+
   toggleAlert("success")
 }

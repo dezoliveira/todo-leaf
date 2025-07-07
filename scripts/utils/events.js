@@ -134,3 +134,14 @@ export const toggleSchedule = () => {
     }
   })
 }
+
+const tasksElement = document.getElementById("nav-tasks-tab")
+const scheduleElement = document.getElementById("nav-schedule-tab")
+
+tasksElement.addEventListener('click', (e) => {
+  renderTaskList(1, false)
+})
+  
+scheduleElement.addEventListener('click', (e) => {
+  renderTaskList(1, true)
+})
