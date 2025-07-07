@@ -19,7 +19,7 @@ const beginTask = () => {
 // Renderiza as tasks na lista
 export const renderTaskList = (currentPage = 1, schedule = false) => {
   const todoListElement = document.getElementById("todoList")
-  const tasks = getTasks()
+  let tasks = getTasks()
   
   // ordenação das tasks por hora criada
   let sortedTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -40,8 +40,8 @@ export const renderTaskList = (currentPage = 1, schedule = false) => {
   todoListElement.innerHTML = ""
 
   if (tasks.length > 10) {
-    createPagination(sortedTasks)
-    
+    createPagination(sortedTasks, schedule)
+
   } else {
     document.querySelector('#pagination').style.display = 'none'
   }
