@@ -28,7 +28,14 @@ export const completeTask = (task, e) => {
   spanElement.classList.add("completed")
   buttonElement.classList.add("text-success")
 
-  renderTaskList()
+  if (task.schedule) {
+    document.getElementById('nav-schedule-tab').click()
+      renderTaskList(1, true)
+  
+  } else {
+    document.getElementById('nav-tasks-tab').click()
+    renderTaskList(1, false)
+  }
 
   toggleAlert("info")
 }

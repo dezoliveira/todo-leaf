@@ -17,7 +17,7 @@ const beginTask = () => {
 }
 
 // Renderiza as tasks na lista
-export const renderTaskList = (currentPage = 1, schedule = false) => {
+export const renderTaskList = (currentPage = 1, schedule = false, completed = false) => {
   const todoListElement = document.getElementById("todoList")
   let tasks = getTasks()
   
@@ -29,6 +29,13 @@ export const renderTaskList = (currentPage = 1, schedule = false) => {
   
   } else {
     sortedTasks = tasks.filter(task => task.schedule === null)
+  }
+
+  if (completed) {
+    sortedTasks = sortedTasks.filter(task=> task.completed === true)
+
+  } else {
+    sortedTasks = sortedTasks.filter(task=> task.completed === false)
   }
 
   // configurações da paginação
