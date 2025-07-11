@@ -137,7 +137,7 @@ export const toggleSchedule = () => {
 
 const tasksElement = document.getElementById("nav-tasks-tab")
 const scheduleElement = document.getElementById("nav-schedule-tab")
-const completeElement = document.getElementById("nav-complete-tab")
+const completeElement = document.getElementById("nav-completed-tab")
 
 tasksElement.addEventListener('click', () => {
   renderTaskList(1, false, false)

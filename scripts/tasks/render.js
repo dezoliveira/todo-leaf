@@ -47,7 +47,7 @@ export const renderTaskList = (currentPage = 1, schedule = false, completed = fa
   todoListElement.innerHTML = ""
 
   if (tasks.length > 10) {
-    createPagination(sortedTasks, schedule)
+    createPagination(sortedTasks, schedule, completed)
 
   } else {
     document.querySelector('#pagination').style.display = 'none'
