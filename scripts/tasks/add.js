@@ -47,8 +47,6 @@ export const addTask = async () => {
     weatherIcon: icon
   }
 
-  console.log(newTask)
-
   // Adiciona nova task junto com as outras
   const updatedTasks = [...tasks, newTask]
   setTasks(updatedTasks)
@@ -65,7 +63,6 @@ export const addTask = async () => {
   } else {
     document.getElementById('nav-tasks-tab').click()
   }
-
 
   toggleAlert("success")
 }

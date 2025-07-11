@@ -11,11 +11,6 @@ import { deleteTask } from "./delete"
 const btnConfirm = document.getElementById("btnConfirm")
 let taskToDelete = null
 
-// Inicia o usuário ao fluxo das tasks
-const beginTask = () => {
-  taskInput.focus()
-}
-
 // Renderiza as tasks na lista
 export const renderTaskList = (currentPage = 1, schedule = false, completed = false) => {
   const todoListElement = document.getElementById("todoList")
@@ -23,6 +18,8 @@ export const renderTaskList = (currentPage = 1, schedule = false, completed = fa
   
   // ordenação das tasks por hora criada
   let sortedTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
+  console.log(tasks.createdAt)
 
   if (schedule) {
     sortedTasks = tasks.filter(task => task.schedule !== null)
@@ -39,14 +36,14 @@ export const renderTaskList = (currentPage = 1, schedule = false, completed = fa
   }
 
   // configurações da paginação
-  const itensPerPage = 10
+  const itensPerPage = 8
   const start = (currentPage -1) * itensPerPage
   const end = start + itensPerPage
   const paginatedTasks = sortedTasks.slice(start, end)
   
   todoListElement.innerHTML = ""
 
-  if (tasks.length > 10) {
+  if (tasks.length > 8) {
     createPagination(sortedTasks, schedule, completed)
 
   } else {
@@ -177,23 +174,13 @@ export const renderTaskList = (currentPage = 1, schedule = false, completed = fa
     const span = document.createElement("span")
     span.textContent = "Lista vazia, "
 
-    // cria uma ancora
-    const a = document.createElement("a")
-    a.href = "#"
-    
-    a.textContent = "Adicione uma tarefa"
-    
-    // adiciona evento de click na ancora
-    a.addEventListener("click", () => {
-      
-      // função de introdução a task
-      beginTask()
-    })
+    const strong = document.createElement("strong")
+    strong.textContent =  "adicione uma tarefa"
 
     // renderiza todos os elementos criados acima como filhos da todoList
     todoListElement.appendChild(li)
     li.appendChild(span)
-    span.appendChild(a)
+    span.appendChild(strong)
   }
 
   // deleta task específica caso o usuário clique em deletar

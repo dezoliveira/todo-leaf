@@ -11,8 +11,20 @@ export const deleteTask = (task) => {
   let updatedTasks = tasks.filter((todo) => todo.id !== task.id)
   setTasks(updatedTasks)
 
-  // Renderiza a lista 
-  renderTaskList()
+  const activeTab = document.querySelector('.nav-link.active').id
+
+  let schedule = false
+  let completed = false
+
+  if (activeTab === 'nav-schedule-tab') {
+    schedule = true
+  }
+
+  if (activeTab === 'nav-completed-tab') {
+    completed = true
+  }
+
+  renderTaskList(1, schedule, completed)
   
   toggleAlert("danger")
 }

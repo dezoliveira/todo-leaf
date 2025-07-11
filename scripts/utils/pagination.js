@@ -6,7 +6,7 @@ export const createPagination = (tasks, schedule = false, completed = false) => 
   const pagination = document.querySelector('#pagination')
   
   // calcula o número de páginas com base no número de tarefas
-  const pages = Math.ceil(tasks.length / 10)
+  const pages = Math.ceil(tasks.length / 8)
   let html = '<ul class="pagination d-flex justify-content-end m-0 p-2">'
 
   // exibe apenas se tiver alguma página
